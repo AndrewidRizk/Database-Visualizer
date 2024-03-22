@@ -1,6 +1,6 @@
 # app.py
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 import mysql.connector
 
 app = Flask(__name__)
@@ -34,9 +34,12 @@ def index():
         cursor.execute("SELECT Username, Password FROM user")
         users = cursor.fetchall()
         cursor.close()
-        db_connection.close()
         return render_template('index.html', users=users, db_connected=True)
     else:
         return render_template('index.html', db_connected=False)
 
-
+@app.route('/refresh')
+def refresh():
+    global db_connection
+    db_connection = connect_to_database()
+    return redirect(url_for('index'))
