@@ -11,7 +11,7 @@ db_config = {
     'database': os.environ.get('DB_NAME'),
     'user': os.environ.get('DB_USER'),
     'password': os.environ.get('DB_PASSWORD'),
-    'port': int(os.environ.get('DB_PORT', '3306'))  # Default port is 3306
+    'port': "3306"  # Default port is 3306
 }
 
 # Connect to the database
